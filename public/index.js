@@ -3,7 +3,7 @@ const app = function () {
 
   const beer = JSON.parse(localStorage.getItem('beer'));
 
-makeRequest(url, beer)
+  makeRequest(url, beer);
 
 }
 
@@ -26,10 +26,22 @@ var populateList = function(beers){
 
   beers.forEach(function(beer){
     var li = document.createElement('li');
+    var image = beer.image_url;
+   var imageItem = createImageListItem(image);
     li.innerText = beer.name;
     ul.appendChild(li);
-  });
+    ul.appendChild(imageItem)
 
+  });
+}
+
+var createImageListItem = function (imageLink) {
+  const imageItem = document.createElement('li');
+  const image = document.createElement('img');
+  image.src = imageLink;
+  image.style.maxWidth = "250px";
+  imageItem.appendChild(image);
+  return imageItem;
 }
 
 document.addEventListener('DOMContentLoaded', app);
